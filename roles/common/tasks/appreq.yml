@@ -9,8 +9,9 @@
     dest: /etc/yum.repos.d/mongo.repo
   when: component == "catalogue"
 
-- name: Create RoboShop User
-  ansible.builtin.shell: useradd roboshop
+- name: Add Application User
+  ansible.builtin.user:
+    name: roboshop
 
 - name: Cleanup Existing Application Content
   ansible.builtin.file:
