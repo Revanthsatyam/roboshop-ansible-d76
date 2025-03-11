@@ -16,7 +16,7 @@
 
 - name: Load Schema
   ansible.builtin.import_tasks: mongo-schema.yml
-  when: "{{ component }}" is catalogue
+  when: schema is defined
 
 - name: Start {{component}} Service
   ansible.builtin.import_tasks: systemd-setup.yml
