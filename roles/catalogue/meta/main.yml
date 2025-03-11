@@ -1,2 +1,2 @@
 dependencies:
-  - role: set-hostname {{component}}
+  - role: commmon
