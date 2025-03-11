@@ -23,7 +23,7 @@
     state: directory
 
 - name: Download {{ component }} Artifacts
-  ansible.built.unarchive:
+  ansible.builtin.unarchive:
     src: "https://roboshop-artifacts.s3.amazonaws.com/{{ component }}.zip"
     dest: "/tmp/{{ component }}.zip"
     remote_src: yes
