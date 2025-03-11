@@ -14,7 +14,7 @@
 - name: Download Application Content
   ansible.builtin.unarchive:
     src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-    dest: /app
+    dest: /usr/share/nginx/html
     remote_src: yes
 
 - name: Start {{ component }} Service
