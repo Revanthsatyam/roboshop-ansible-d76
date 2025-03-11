@@ -19,6 +19,6 @@
 
 - name: Start {{ component }} Service
   ansible.builtin.systemd:
-    name: "{{ component }}"
+    name: nginx
     state: restarted
     enabled: yes
