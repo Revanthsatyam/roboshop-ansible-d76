@@ -7,7 +7,7 @@
   ansible.builtin.template:
     src: mongo.repo
     dest: /etc/yum.repos.d/mongo.repo
-    when: "{{ component }} is catalogue"
+  when: "{{ component }} is catalogue"
 
 - name: Create RoboShop User
   ansible.builtin.shell: useradd roboshop
