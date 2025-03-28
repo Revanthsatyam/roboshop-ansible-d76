@@ -18,5 +18,10 @@
   ansible.builtin.import_tasks: mongo-schema.yml
   when: schema is defined
 
+- name: Download DocumentDB pem file
+  ansible.builtin.get_url:
+    url: https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
+    dest: /app/global-bundle.pem
+
 - name: Start {{component}} Service
   ansible.builtin.import_tasks: systemd-setup.yml
