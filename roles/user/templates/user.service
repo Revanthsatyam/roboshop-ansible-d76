@@ -4,7 +4,8 @@ Description = User Service
 User=roboshop
 Environment=MONGO=true
 Environment=REDIS_HOST=redis-dev.rsdevops.in
-Environment=MONGO_URL="mongodb://mongodb-dev.rsdevops.in:27017/users"
+#Environment=MONGO_URL="mongodb://mongodb-dev.rsdevops.in:27017/users"
+Environment=MONGO_URL="mongodb://{{ lookup('amazon.aws.aws_ssm', 'docdb.{{env}}.master_username', region='us-east-1') }}:{{ lookup('amazon.aws.aws_ssm', 'docdb.{{env}}.master_password', region='us-east-1') }}@:{{ lookup('amazon.aws.aws_ssm', 'docdb.{{env}}.endpoint', region='us-east-1') }}27017/users?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false:27017/users"
 ExecStart=/bin/node /app/server.js
 SyslogIdentifier=user
 
