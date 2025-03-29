@@ -4,7 +4,7 @@ Description = Cart Service
 User=roboshop
 Environment=REDIS_HOST={{ lookup('amazon.aws.aws_ssm', 'elasticache.{{ env }}.endpoint', region='us-east-1') }}
 Environment=CATALOGUE_HOST=catalogue-{{ env }}.rsdevops.in
-Environment=CATALOGUE_PORT=8080
+Environment=CATALOGUE_PORT=80
 ExecStart=/bin/node /app/server.js
 SyslogIdentifier=cart
 
