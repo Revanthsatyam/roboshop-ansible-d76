@@ -7,7 +7,7 @@
   ansible.builtin.template:
     src: mongo.repo
     dest: /etc/yum.repos.d/mongo.repo
-  when: component == "catalogue"
+  when: component == "catalogue" or component == "user"
 
 - name: Add Application User
   ansible.builtin.user:
