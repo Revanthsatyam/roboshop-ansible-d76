@@ -1,0 +1,34 @@
+- name: Download Node Exporter Binary
+  ansible.builtin.get_url:
+    url: "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz"
+    dest: "/tmp/node_exporter-1.9.0.linux-amd64.tar.gz"
+
+- name: Extract Node Exporter
+  ansible.builtin.unarchive:
+    src: "/tmp/node_exporter-1.9.0.linux-amd64.tar.gz"
+    dest: "/tmp/"
+    remote_src: yes
+
+- name: Move Node Exporter Binary to /usr/local/bin
+  ansible.builtin.shell: mv /tmp/node_exporter-1.9.0.linux-amd64/node_exporter /usr/local/bin/
+
+- name: Create a node_exporter user to run the node exporter service
+  ansible.builtin.shell: useradd -rs /bin/false node_exporter
+
+- name: Copy Node Exporter Service File
+  ansible.builtin.template:
+    src: node_exporter.service
+    dest: /etc/systemd/system/
+
+- name: Start Node_Exporter Service
+  ansible.builtin.systemd:
+    name: node_exporter
+    state: restrated
+    enabled: yes
+    daemon_reload: yes
+
+#- name: Move Node Exporter Binary to /usr/local/bin
+#  ansible.builtin.command:
+#    cmd: mv /tmp/node_exporter-1.9.0.linux-amd64/node_exporter /usr/local/bin/
+#  args:
+#    creates: /usr/local/bin/node_exporter
