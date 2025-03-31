@@ -14,5 +14,11 @@
   args:
     chdir: /app
 
+- name: Install Node Exporter
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: node-exporter.yml
+
 - name: Start {{component}} Service
   ansible.builtin.import_tasks: systemd-setup.yml
+
