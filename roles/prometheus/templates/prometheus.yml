@@ -18,20 +18,25 @@ rule_files:
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
+#scrape_configs:
+#  - job_name: "ec2"
+#    ec2_sd_configs:
+#      - region: us-east-1
+#        port: 9100
+#        filters:
+#          - name: "tag:Monitor"
+#            values: [ "yes" ]
+#    relabel_configs:
+#      - source_labels: [ __meta_ec2_tag_Name ]
+#        target_label: Name
+#      - source_labels: [ __meta_ec2_tag_env ]
+#        target_label: env
+#      - source_labels: [ __meta_ec2_instance_state ]
+#        target_label: instance_state
+#      - source_labels: [ __meta_ec2_instance_type ]
+#        target_label: instance_type
+
 scrape_configs:
-  - job_name: "ec2"
-    ec2_sd_configs:
-      - region: us-east-1
-        port: 9100
-        filters:
-          - name: "tag:Monitor"
-            values: [ "yes" ]
-    relabel_configs:
-      - source_labels: [ __meta_ec2_tag_Name ]
-        target_label: Name
-      - source_labels: [ __meta_ec2_tag_env ]
-        target_label: env
-      - source_labels: [ __meta_ec2_instance_state ]
-        target_label: instance_state
-      - source_labels: [ __meta_ec2_instance_type ]
-        target_label: instance_type
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['10.0.2.240:9100']
