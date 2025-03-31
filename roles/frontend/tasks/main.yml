@@ -24,5 +24,6 @@
     enabled: yes
 
 - name: Install Node Exporter
-  ansible.builtin.import_role: common
-  tasks_from: node-exporter.yml
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: node-exporter.yml
