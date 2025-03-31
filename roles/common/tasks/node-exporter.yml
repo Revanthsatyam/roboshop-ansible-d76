@@ -9,10 +9,10 @@
     dest: "/tmp/"
     remote_src: yes
 
-- name: Move Node Exporter Binary to /usr/local/bin
+- name: Move Node Exporter Binary
   ansible.builtin.shell: mv /tmp/node_exporter-1.9.0.linux-amd64/node_exporter /usr/local/bin/
 
-- name: Create a node_exporter user to run the node exporter service
+- name: Create A Node Exporter User
   ansible.builtin.user:
     name: node_exporter
     shell: /bin/false
@@ -23,7 +23,7 @@
     src: node_exporter.service
     dest: /etc/systemd/system/
 
-- name: Start Node_Exporter Service
+- name: Start Node Exporter Service
   ansible.builtin.systemd:
     name: node_exporter
     state: restarted
