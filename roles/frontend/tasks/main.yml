@@ -22,3 +22,7 @@
     name: nginx
     state: restarted
     enabled: yes
+
+- name: Install Node Exporter
+  ansible.builtin.import_role: common
+  tasks_from: node-exporter.yml
