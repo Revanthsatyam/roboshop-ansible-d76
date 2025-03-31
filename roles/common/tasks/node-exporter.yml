@@ -29,9 +29,3 @@
     state: restarted
     enabled: yes
     daemon_reload: yes
-
-#- name: Move Node Exporter Binary to /usr/local/bin
-#  ansible.builtin.command:
-#    cmd: mv /tmp/node_exporter-1.9.0.linux-amd64/node_exporter /usr/local/bin/
-#  args:
-#    creates: /usr/local/bin/node_exporter
