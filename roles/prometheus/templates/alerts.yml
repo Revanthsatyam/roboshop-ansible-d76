@@ -2,21 +2,21 @@ groups:
   - name: instance-alerts
     rules:
       - alert: HighCPUUsage
-        expr: avg by (instance) (rate(node_cpu_seconds_total{mode!="idle"}[5m])) * 100 > 1
+        expr: avg by (instance) (rate(node_cpu_seconds_total{mode!="idle"}[5m])) * 100 > 80
         for: 2m
         labels:
           severity: warning
         annotations:
-          summary: "High CPU usage on {{ $labels.instance }}"
+          summary: "High CPU usage on {{ '{{' }} $labels.instance {{ '}}' }}"
           description: "CPU usage is above 80% for more than 2 minutes."
 
       - alert: HighMemoryUsage
-        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 1
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 80
         for: 2m
         labels:
           severity: warning
         annotations:
-          summary: "High Memory usage on {{ $labels.instance }}"
+          summary: "High Memory usage on {{ '{{' }} $labels.instance {{ '}}' }}"
           description: "Memory usage is above 80% for more than 2 minutes."
 
       - alert: InstanceDown
@@ -25,5 +25,5 @@ groups:
         labels:
           severity: critical
         annotations:
-          summary: "Instance {{ $labels.instance }} is down"
-          description: "Prometheus target {{ $labels.instance }} has been unreachable for more than 5 minutes."
+          summary: "Instance {{ '{{' }} $labels.instance {{ '}}' }} is down"
+          description: "Prometheus target {{ '{{' }} $labels.instance {{ '}}' }} has been unreachable for more than 5 minutes."
