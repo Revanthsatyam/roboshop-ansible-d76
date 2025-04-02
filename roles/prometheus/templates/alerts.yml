@@ -2,7 +2,7 @@ groups:
   - name: instance-alerts
     rules:
       - alert: HighCPUUsage
-        expr: avg by (instance) (rate(node_cpu_seconds_total{mode!="idle"}[5m])) * 100 > 1
+        expr: avg by (instance) (rate(node_cpu_seconds_total{mode!="idle"}[5m])) * 100 > 80
         for: 2m
         labels:
           severity: warning
@@ -11,7 +11,7 @@ groups:
           description: "CPU usage is above 80% for more than 2 minutes."
 
       - alert: HighMemoryUsage
-        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 1
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 80
         for: 2m
         labels:
           severity: warning
