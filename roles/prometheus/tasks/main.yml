@@ -3,6 +3,11 @@
     src: prometheus.yml
     dest: /etc/prometheus/prometheus.yml
 
+- name: Copy Alerts Config File
+  ansible.builtin.template:
+    src: alerts.yml
+    dest: /etc/prometheus/alerts.yml
+
 - name: Start Prometheus Service
   ansible.builtin.systemd:
     name: prometheus
