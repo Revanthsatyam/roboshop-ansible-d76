@@ -34,7 +34,7 @@ groups:
         expr: "node_systemd_unit_state{name=\"{{ component.service_name }}.service\", state=\"active\"} < 1"
         for: 1m
         labels:
-          severity: page
+          severity: critical
         annotations:
           summary: "{{ component.name }} Component - Service Down"
       {% endfor %}
