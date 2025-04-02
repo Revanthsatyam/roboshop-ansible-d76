@@ -28,12 +28,12 @@ groups:
           summary: "Instance {{ '{{' }} $labels.instance {{ '}}' }} is down"
           description: "Prometheus target {{ '{{' }} $labels.instance {{ '}}' }} has been unreachable for more than 5 minutes."
 
-#      {% for component in components %}
-#      - alert: ServiceDown-{{component.name}}
-#        expr: node_systemd_unit_state{component="{{ component.name }}", exported_name="{{ component.service_name }}.service",state="active"} < 1
-#        for: 1m
-#        labels:
-#          severity: page
-#        annotations:
-#          summary: { { component.name } } Component - Service Down
-#      {%- endfor %}
+      {% for component in components %}
+      - alert: ServiceDown-{{component.name}}
+        expr: node_systemd_unit_state{component="{{ component.name }}", exported_name="{{ component.service_name }}.service",state="active"} < 1
+        for: 1m
+        labels:
+          severity: page
+        annotations:
+          summary: "{{ component.name }} Component - Service Down"
+      {% endfor %}
