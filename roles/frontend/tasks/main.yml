@@ -22,15 +22,15 @@
     name: common
     tasks_from: node-exporter.yml
 
-- name: Setup Rsyslog Configuration file
-  ansible.builtin.template:
-    src: "rsyslog.conf"
-    dest: /etc/rsyslog.d/roboshop.conf
-
-- name: Start rsyslog Service
-  ansible.builtin.systemd:
-    name: "rsyslog"
-    state: restarted
+#- name: Setup Rsyslog Configuration file
+#  ansible.builtin.template:
+#    src: "rsyslog.conf"
+#    dest: /etc/rsyslog.d/roboshop.conf
+#
+#- name: Start rsyslog Service
+#  ansible.builtin.systemd:
+#    name: "rsyslog"
+#    state: restarted
 
 - name: Start {{ component }} Service
   ansible.builtin.systemd:
