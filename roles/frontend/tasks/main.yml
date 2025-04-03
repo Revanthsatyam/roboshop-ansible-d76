@@ -17,13 +17,23 @@
     dest: /usr/share/nginx/html
     remote_src: yes
 
+- name: Install Node Exporter
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: node-exporter.yml
+
+- name: Setup Rsyslog Configuration file
+  ansible.builtin.template:
+    src: "rsyslog.conf"
+    dest: /etc/rsyslog.d/roboshop.conf
+
+- name: Start rsyslog Service
+  ansible.builtin.systemd:
+    name: "rsyslog"
+    state: restarted
+
 - name: Start {{ component }} Service
   ansible.builtin.systemd:
     name: nginx
     state: restarted
     enabled: yes
-
-- name: Install Node Exporter
-  ansible.builtin.import_role:
-    name: common
-    tasks_from: node-exporter.yml
