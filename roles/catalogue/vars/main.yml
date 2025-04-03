@@ -1,1 +1,4 @@
+component: catalogue
 schema: true
+log_type: json
+log_path: /var/log/catalogue.log
