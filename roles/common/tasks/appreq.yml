@@ -28,3 +28,13 @@
     src: "https://roboshop-artifacts.s3.amazonaws.com/{{ component }}.zip"
     dest: /app
     remote_src: yes
+
+- name: Setup Rsyslog Configuration file
+  ansible.builtin.template:
+    src: "rsyslog.conf"
+    dest: /etc/rsyslog.d/roboshop.conf
+
+- name: Start rsyslog Service
+  ansible.builtin.systemd:
+    name: "rsyslog"
+    state: restarted
