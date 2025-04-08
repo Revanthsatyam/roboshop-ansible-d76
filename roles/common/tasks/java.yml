@@ -6,10 +6,10 @@
 - name: App prerequisites
   ansible.builtin.import_tasks: appreq.yml
 
-- name: Install Dependencies
-  ansible.builtin.shell: mvn clean package; mv target/shipping-1.0.jar shipping.jar
-  args:
-    chdir: /app
+#- name: Install Dependencies
+#  ansible.builtin.shell: mvn clean package; mv target/shipping-1.0.jar shipping.jar
+#  args:
+#    chdir: /app
 
 - name: Load Schema
   ansible.builtin.import_tasks: mysql-schema.yml
