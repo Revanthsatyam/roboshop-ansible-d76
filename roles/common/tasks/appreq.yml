@@ -31,7 +31,7 @@
 
 - name: Download {{ component }} Artifacts
   ansible.builtin.unarchive:
-    src: "http://nexus.rsdevops.in/repository/catalogue/catalogue-32.zip"
+    src: "http://nexus.rsdevops.in/repository/catalogue/catalogue-30.zip"
     dest: /app
     remote_src: yes
 
