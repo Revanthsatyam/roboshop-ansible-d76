@@ -23,17 +23,21 @@
     path: /app
     state: directory
 
-- name: Download {{ component }} Artifacts
-  ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/{{ component }}.zip
-    dest: /app
-    remote_src: yes
-
 #- name: Download {{ component }} Artifacts
 #  ansible.builtin.unarchive:
-#    src: http://admin:Devops74@nexus.rsdevops.in/repository/catalogue/catalogue-30.zip
+#    src: https://roboshop-artifacts.s3.amazonaws.com/{{ component }}.zip
 #    dest: /app
 #    remote_src: yes
+
+- name: Download {{ component }} Artifacts
+  ansible.builtin.unarchive:
+    src: http://{{ nexus_username }}:{{ nexus_password }}@nexus.rsdevops.in/repository/{{ component }}/{{ component }}-{{ version }}.zip
+    dest: /app
+    remote_src: yes
+  vars:
+    nexus_username: "{{ lookup('amazon.aws.aws_ssm', 'nexus.username', region='us-east-1') }}"
+    nexus_password: "{{ lookup('amazon.aws.aws_ssm', 'nexus.password', region='us-east-1') }}"
+    version: "{{ lookup('amazon.aws.aws_ssm', 'component.version', region='us-east-1') }}"
 
 - name: Setup Rsyslog Configuration file
   ansible.builtin.template:
