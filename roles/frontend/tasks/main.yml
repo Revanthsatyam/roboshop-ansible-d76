@@ -30,7 +30,7 @@
   vars:
     nexus_username: "{{ lookup('amazon.aws.aws_ssm', 'nexus.{{ env }}.username', region='us-east-1') }}"
     nexus_password: "{{ lookup('amazon.aws.aws_ssm', 'nexus.{{ env }}.password', region='us-east-1') }}"
-    version: "{{ lookup('amazon.aws.aws_ssm', component ~ '.version', region='us-east-1') }}"
+    version: "{{ lookup('amazon.aws.aws_ssm', component ~ '.{{ env }}.version', region='us-east-1') }}"
 
 - name: Install Node Exporter
   ansible.builtin.import_role:
