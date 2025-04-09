@@ -22,7 +22,7 @@
 #    dest: /usr/share/nginx/html
 #    remote_src: yes
 
-- name: Download Application Content
+- name: Download Application Content From Nexus Repo
   ansible.builtin.unarchive:
     src: http://{{ nexus_username }}:{{ nexus_password }}@nexus.rsdevops.in/repository/{{ component }}/{{ component }}-{{ version }}.zip
     dest: /usr/share/nginx/html
